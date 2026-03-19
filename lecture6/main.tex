@@ -1,0 +1,482 @@
+\documentclass[10pt]{beamer}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{makecell}
+\usepackage{CJKutf8}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\pgfplotsset{compat=newest}
+\setbeamertemplate{navigation symbols}{}
+
+% Add page number to the lower right corner
+\setbeamertemplate{footline}{%
+  \hfill\usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertframenumber\,/\,\inserttotalframenumber\hspace*{1ex}\vskip2pt%
+}
+\setbeamercolor{page number in head/foot}{fg=gray}
+\setbeamerfont{page number in head/foot}{size=\small}
+
+\title{Introduction to Databases \& Basic SQL Syntax}
+\author{Tzu-You Lin}
+\date{February 17, 2025}
+
+% Automatically add a section title slide at the beginning of each section.
+\AtBeginSection[]{
+  \begin{frame}
+    \vfill
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+      \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \vfill
+  \end{frame}
+}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}[fragile]
+  \titlepage
+\end{frame}
+
+% Agenda Slide
+\begin{frame}[fragile]
+  \frametitle{Agenda}
+  \begin{itemize}
+    \item \textbf{Part I: What is a Database?}
+    \item \textbf{Part II: Basic SQL Syntax}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Part I: What is a Database?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What is a Database?}
+
+% Slide 1 of Part I
+\begin{frame}[fragile]
+  \frametitle{What is a Database?}
+  A \textbf{database} is an organized collection of information. \\
+  \vspace{0.5em}
+  \textit{Imagine a digital filing cabinet where everything is neatly arranged so you can find it easily.}
+\end{frame}
+
+% Slide 2 of Part I
+\begin{frame}[fragile]
+  \frametitle{Why Do We Need Databases?}
+  \begin{itemize}
+    \item They help us keep track of large amounts of information.
+    \item They allow quick searching and organizing—like finding a specific contact in your phone.
+    \item They reduce clutter compared to piles of paper or unorganized files.
+  \end{itemize}
+\end{frame}
+
+% Slide 3 of Part I
+\begin{frame}[fragile]
+  \frametitle{Everyday Analogy: Your Closet}
+  Think of a database as your closet:
+  \begin{itemize}
+    \item \textbf{Shelves:} Represent different tables.
+    \item \textbf{Items:} Represent records (each item is stored with details like type, color, size).
+  \end{itemize}
+  \textit{Just as you know where your favorite sweater is, a database helps you locate information quickly.}
+\end{frame}
+
+% Slide 4 of Part I
+\begin{frame}[fragile]
+  \frametitle{Key Components of a Database}
+  \begin{itemize}
+    \item \textbf{Tables:} Similar to spreadsheets, they organize data in rows and columns.
+    \item \textbf{Records:} Individual entries (like a single contact in your address book).
+    \item \textbf{Fields:} Specific details about each record (name, phone number, email).
+  \end{itemize}
+
+  \vspace{1em}
+
+  Example:
+
+  \begin{center}
+    \begin{tabular}{ccc}
+      \hline
+      \textbf{Name} & \textbf{Phone} & \textbf{Email} \\
+      \hline
+      John Smith & 555-0123 & john@example.com \\
+      Jane Doe & 555-0456 & jane@example.com \\
+      Bob Wilson & 555-0789 & bob@example.com \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+% Slide 5 of Part I
+\begin{frame}[fragile]
+  \frametitle{How Data is Organized}
+  Data is organized in a structured way:
+  \begin{itemize}
+    \item Each table stores a specific type of information.
+    \item Columns define what kind of data is stored.
+    \item Rows hold the actual information.
+  \end{itemize}
+  \textit{Think of it as a well-labeled recipe box where every recipe has its own card.}
+\end{frame}
+
+% Slide 6 of Part I
+\begin{frame}[fragile]
+  \frametitle{Types of Databases}
+  \begin{itemize}
+    \item \textbf{Relational Databases:} Highly structured (like a library catalog).
+    \item \textbf{NoSQL Databases:} More flexible (like a personal journal).
+  \end{itemize}
+  \textit{For today, we focus on relational databases, which are common and easy to understand.}
+\end{frame}
+
+% Slide 7 of Part I
+\begin{frame}[fragile]
+  \frametitle{Real-World Examples of Databases}
+  \begin{itemize}
+    \item \textbf{Phone Books:} Lists names and phone numbers.
+    \item \textbf{Online Stores:} Keep track of products, prices, and orders.
+    \item \textbf{Social Media:} Manage user profiles, posts, and connections.
+  \end{itemize}
+
+  \vspace{1em}
+  Example database schema:
+  \begin{center}
+    \begin{tabular}{ll}
+      \hline
+      \multicolumn{2}{c}{\textbf{Users Table}} \\
+      \hline
+      user\_id & INTEGER PRIMARY KEY \\
+      name & VARCHAR(50) \\
+      email & VARCHAR(100) \\
+      join\_date & DATE \\
+      \hline
+      \\
+      \multicolumn{2}{c}{\textbf{Orders Table}} \\
+      \hline
+      order\_id & INTEGER PRIMARY KEY \\
+      user\_id & INTEGER (Foreign Key) \\
+      order\_date & DATE \\
+      total\_amount & DECIMAL(10,2) \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \textit{These tables show how customer data and their orders are linked in an e-commerce database.}
+\end{frame}
+
+% Slide 8 of Part I
+\begin{frame}[fragile]
+  \frametitle{Benefits of Using a Database}
+  \begin{itemize}
+    \item \textbf{Efficiency:} Quickly find what you need.
+    \item \textbf{Accuracy:} Minimize errors with organized data.
+    \item \textbf{Scalability:} Easily handle growing amounts of information.
+  \end{itemize}
+  \textit{Much like a well-organized closet makes dressing easier, a good database simplifies information management.}
+\end{frame}
+
+% Slide 9 of Part I
+\begin{frame}[fragile]
+  \frametitle{The Role of Databases in Daily Life}
+  Databases are everywhere—even if you don't see them:
+  \begin{itemize}
+    \item Your banking system uses databases to track transactions.
+    \item Streaming services use databases to recommend movies.
+    \item Healthcare systems use databases to store patient records.
+  \end{itemize}
+\end{frame}
+
+% Slide 10 of Part I
+\begin{frame}[fragile]
+  \frametitle{Summary: What is a Database?}
+  \begin{itemize}
+    \item A database is an organized, digital storage system.
+    \item It uses tables, records, and fields to manage data.
+    \item It makes finding, updating, and managing information efficient and reliable.
+  \end{itemize}
+  \textit{Think of it as the backbone of many everyday systems that keep our lives running smoothly.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Part II: Basic SQL Syntax
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Basic SQL Syntax}
+
+% Slide 11 of Part II
+\begin{frame}[fragile]
+  \frametitle{Introduction to SQL}
+  \textbf{SQL} (Structured Query Language) is the language used to talk to databases. \\
+  \vspace{0.5em}
+  Let's learn SQL using a sample \textbf{employees} table:
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+      \hline
+      \textbf{id} & \textbf{name} & \textbf{department} & \textbf{salary} & \textbf{hire\_date} \\
+      \hline
+      1 & John Smith & IT & 75000 & 2020-01-15 \\
+      2 & Mary Johnson & HR & 65000 & 2019-03-20 \\
+      3 & Bob Wilson & IT & 80000 & 2018-06-10 \\
+      4 & Alice Brown & Marketing & 70000 & 2021-02-28 \\
+      5 & David Lee & HR & 62000 & 2022-09-01 \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+% Slide 12 of Part II
+\begin{frame}[fragile]
+  \frametitle{Basic Structure of a Query: SELECT \& FROM}
+  \begin{itemize}
+    \item \textbf{SELECT:} Specifies which columns you want
+    \item \textbf{FROM:} Indicates which table to use
+  \end{itemize}
+  
+  \begin{itemize}
+    \item \textbf{Query:} \\
+    \texttt{SELECT name, department} \\
+    \texttt{FROM employees;}
+    
+    \item \textbf{Result:}
+    \begin{center}
+      \begin{tabular}{|c|c|}
+        \hline
+        \textbf{name} & \textbf{department} \\
+        \hline
+        John Smith & IT \\
+        Mary Johnson & HR \\
+        Bob Wilson & IT \\
+        Alice Brown & Marketing \\
+        David Lee & HR \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+% Slide 13 of Part II
+\begin{frame}[fragile]
+  \frametitle{Filtering Data with WHERE}
+  \begin{itemize}
+    \item \textbf{Query:} \\
+    \texttt{SELECT name, salary} \\
+    \texttt{FROM employees} \\
+    \texttt{WHERE department = 'IT';}
+    
+    \item \textbf{Result:}
+    \begin{center}
+      \begin{tabular}{|c|c|}
+        \hline
+        \textbf{name} & \textbf{salary} \\
+        \hline
+        John Smith & 75000 \\
+        Bob Wilson & 80000 \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+  
+  \vspace{0.5em}
+  \begin{itemize}
+    \item \textbf{Query:} \\
+    \texttt{SELECT name} \\
+    \texttt{FROM employees} \\
+    \texttt{WHERE department = 'HR'} \\
+    \texttt{AND salary > 63000;}
+    
+    \item \textbf{Result:}
+    \begin{center}
+      \begin{tabular}{|c|}
+        \hline
+        \textbf{name} \\
+        \hline
+        Mary Johnson \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+% Slide 14 of Part II
+\begin{frame}[fragile]
+  \frametitle{Sorting Results with ORDER BY}
+  \begin{itemize}
+    \item \textbf{Query:} \\
+    \texttt{SELECT name, salary} \\
+    \texttt{FROM employees} \\
+    \texttt{ORDER BY salary DESC;}
+    
+    \item \textbf{Result:}
+    \begin{center}
+      \begin{tabular}{|c|c|}
+        \hline
+        \textbf{name} & \textbf{salary} \\
+        \hline
+        Bob Wilson & 80000 \\
+        John Smith & 75000 \\
+        Alice Brown & 70000 \\
+        Mary Johnson & 65000 \\
+        David Lee & 62000 \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+% Slide 15 of Part II
+\begin{frame}[fragile]
+  \frametitle{Inserting Data: INSERT INTO}
+  \begin{itemize}
+    \item \textbf{Query:} \\
+    \texttt{INSERT INTO employees} \\
+    \texttt{(id, name, department, salary, hire\_date)} \\
+    \texttt{VALUES} \\
+    \texttt{(6, 'Sarah Kim', 'Marketing', 68000, '2023-01-15');}
+    
+    \item \textbf{Result:}
+    \begin{center}
+      \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{id} & \textbf{name} & \textbf{department} & \textbf{salary} & \textbf{hire\_date} \\
+        \hline
+        1 & John Smith & IT & 75000 & 2020-01-15 \\
+        2 & Mary Johnson & HR & 65000 & 2019-03-20 \\
+        3 & Bob Wilson & IT & 80000 & 2018-06-10 \\
+        4 & Alice Brown & Marketing & 70000 & 2021-02-28 \\
+        5 & David Lee & HR & 62000 & 2022-09-01 \\
+        6 & Sarah Kim & Marketing & 68000 & 2023-01-15 \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+% Slide 16 of Part II
+\begin{frame}[fragile]
+  \frametitle{Updating Data: UPDATE \& SET}
+  \begin{itemize}
+    \item \textbf{Query:} \\
+    \texttt{UPDATE employees} \\
+    \texttt{SET salary = 82000} \\
+    \texttt{WHERE name = 'Bob Wilson';}
+    
+    \item \textbf{Result:}
+    \begin{center}
+      \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multicolumn{5}{|c|}{\textbf{Before}} \\
+        \hline
+        3 & Bob Wilson & IT & 80000 & 2018-06-10 \\
+        \hline
+        \multicolumn{5}{|c|}{\textbf{After}} \\
+        \hline
+        3 & Bob Wilson & IT & 82000 & 2018-06-10 \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+% Slide 17 of Part II
+\begin{frame}[fragile]
+  \frametitle{Deleting Data: DELETE FROM}
+  \begin{itemize}
+    \item \textbf{Query:} \\
+    \texttt{DELETE FROM employees} \\
+    \texttt{WHERE department = 'Marketing';}
+    
+    \item \textbf{Result:}
+    \begin{center}
+      \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{id} & \textbf{name} & \textbf{department} & \textbf{salary} & \textbf{hire\_date} \\
+        \hline
+        1 & John Smith & IT & 75000 & 2020-01-15 \\
+        2 & Mary Johnson & HR & 65000 & 2019-03-20 \\
+        3 & Bob Wilson & IT & 82000 & 2018-06-10 \\
+        5 & David Lee & HR & 62000 & 2022-09-01 \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+% Slide 18 of Part II
+\begin{frame}[fragile]
+  \frametitle{Grouping and Aggregating Data}
+  \begin{itemize}
+    \item \textbf{Query:} \\
+    \texttt{SELECT department, AVG(salary) as avg\_salary} \\
+    \texttt{FROM employees} \\
+    \texttt{GROUP BY department;}
+    
+    \item \textbf{Result:}
+    \begin{center}
+      \begin{tabular}{|c|c|}
+        \hline
+        \textbf{department} & \textbf{avg\_salary} \\
+        \hline
+        IT & 78500 \\
+        HR & 63500 \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+  
+  \vspace{0.5em}
+  \begin{itemize}
+    \item \textbf{Query:} \\
+    \texttt{SELECT department, COUNT(*) as employee\_count} \\
+    \texttt{FROM employees} \\
+    \texttt{GROUP BY department;}
+    
+    \item \textbf{Result:}
+    \begin{center}
+      \begin{tabular}{|c|c|}
+        \hline
+        \textbf{department} & \textbf{employee\_count} \\
+        \hline
+        IT & 2 \\
+        HR & 2 \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+% Slide 19 of Part II
+\begin{frame}[fragile]
+  \frametitle{Summary of SQL Commands}
+  Using our employees table, we learned:
+  \begin{itemize}
+    \item \textbf{SELECT, FROM:} Retrieve specific columns
+    \item \textbf{WHERE:} Filter records based on conditions
+    \item \textbf{ORDER BY:} Sort results
+    \item \textbf{INSERT INTO:} Add new records
+    \item \textbf{UPDATE:} Modify existing records
+    \item \textbf{DELETE:} Remove records
+    \item \textbf{GROUP BY:} Aggregate data by categories
+  \end{itemize}
+\end{frame}
+
+% Slide 20 of Part II
+\begin{frame}[fragile]
+  \frametitle{Summary and Q\&A}
+  \begin{itemize}
+    \item \textbf{SQL Basics:} SELECT, FROM, WHERE, ORDER BY, INSERT, UPDATE, DELETE, JOIN, GROUP BY.
+    \item \textbf{Key Idea:} SQL lets you ask your database questions and change the data as needed.
+  \end{itemize}
+  \vspace{0.5em}
+  \textit{These commands form the foundation of interacting with databases. Let's open the floor to questions!}
+\end{frame}
+
+\end{document}

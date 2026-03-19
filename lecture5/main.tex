@@ -1,0 +1,309 @@
+\documentclass[10pt]{beamer}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{makecell}
+\usepackage{CJKutf8}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\pgfplotsset{compat=newest}
+\setbeamertemplate{navigation symbols}{}
+
+% Add page number to the lower right corner
+\setbeamertemplate{footline}{%
+  \hfill\usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertframenumber\,/\,\inserttotalframenumber\hspace*{1ex}\vskip2pt%
+}
+\setbeamercolor{page number in head/foot}{fg=gray}
+\setbeamerfont{page number in head/foot}{size=\small}
+
+\title{Web Scraping \& APIs in Python}
+\author{Tzu-You Lin}
+\date{February 17, 2025}
+
+% Automatically add a section title slide at the beginning of each section.
+\AtBeginSection[]{
+  \begin{frame}
+    \vfill
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+      \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \vfill
+  \end{frame}
+}
+
+\begin{document}
+
+% Title Page
+\begin{frame}[fragile]
+    \titlepage
+\end{frame}
+
+% Outline
+\begin{frame}[fragile]{Outline}
+    \tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\begin{frame}[fragile]{What is Web Scraping?}
+    \begin{itemize}
+        \item Automated extraction of data from websites.
+        \item Involves fetching web pages and parsing the content.
+        \item Tools include \texttt{Requests}, \texttt{BeautifulSoup}, \texttt{Scrapy}, and \texttt{Selenium}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{What are APIs?}
+    \begin{itemize}
+        \item Application Programming Interfaces allow communication between software applications.
+        \item Provide structured data (e.g., JSON, XML) from web services.
+        \item Commonly used to access platforms like GitHub, Twitter, and many others.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Web Scraping vs. APIs}
+    \begin{itemize}
+        \item \textbf{Web Scraping:}
+        \begin{itemize}
+            \item Extracts data from raw HTML.
+            \item Often unstructured and subject to website layout changes.
+        \end{itemize}
+        \item \textbf{APIs:}
+        \begin{itemize}
+            \item Provides structured and well-documented data.
+            \item Typically more stable and legally supported.
+        \end{itemize}
+        \item Choice depends on data availability and project requirements.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tools and Techniques}
+\begin{frame}[fragile]{Web Scraping Tools in Python}
+    \begin{itemize}
+        \item \textbf{Requests:} For making HTTP requests.
+        \item \textbf{BeautifulSoup:} For parsing and navigating HTML/XML.
+        \item \textbf{Scrapy:} A robust framework for large-scale scraping projects.
+        \item \textbf{Selenium:} For automating browsers and scraping dynamic content.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{APIs in Python}
+    \begin{itemize}
+        \item \textbf{Requests:} Simplifies HTTP API calls.
+        \item \textbf{JSON:} For parsing and handling JSON data.
+        \item \textbf{Flask/Django:} To create your own API endpoints.
+        \item \textbf{Async Libraries:} Such as \texttt{httpx} and \texttt{aiohttp} for asynchronous API calls.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Making HTTP Requests}
+    \begin{verbatim}
+import requests
+
+url = 'https://example.com/data'
+response = requests.get(url)
+
+if response.status_code == 200:
+    data = response.json()
+    print(data)
+else:
+    print("Error:", response.status_code)
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Parsing HTML with BeautifulSoup}
+    \begin{verbatim}
+from bs4 import BeautifulSoup
+import requests
+
+url = 'https://www.example.com'
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+
+# Extract page title
+title = soup.find('title').get_text()
+print("Page Title:", title)
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Error Handling in Scraping}
+    \begin{itemize}
+        \item Always check HTTP status codes.
+        \item Use \texttt{try-except} blocks to catch exceptions.
+        \item Implement logging to help diagnose issues.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Respecting Website Policies}
+    \begin{itemize}
+        \item Review the site's \texttt{robots.txt} file to understand crawling rules.
+        \item Use rate limiting to avoid overloading servers.
+        \item Follow the website's terms of service.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{APIs in Action}
+\begin{frame}[fragile]{Working with APIs: GitHub Example}
+    \begin{verbatim}
+import requests
+
+url = 'https://api.github.com/repos/python/cpython'
+response = requests.get(url)
+data = response.json()
+
+print("Repository:", data['name'])
+print("Stars:", data['stargazers_count'])
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Working with APIs: Random Stuff Example}
+    \begin{verbatim}
+import requests
+
+url = 'https://api.random.org/json-rpc/4/invoke'
+payload = {
+    "jsonrpc": "2.0",
+    "method": "generateIntegers",
+    "params": {
+        "apiKey": "YOUR-API-KEY",
+        "n": 5,
+        "min": 1,
+        "max": 100
+    },
+    "id": 1
+}
+response = requests.post(url, json=payload)
+
+if response.status_code == 200:
+    data = response.json()
+    numbers = data['result']['random']['data']
+    print("Random numbers:", numbers)
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{API Response Structure}
+    \begin{itemize}
+        \item The response contains:
+        \begin{itemize}
+            \item Random numbers generated
+            \item Request metadata
+            \item Usage information
+            \item API version details
+        \end{itemize}
+        \item Example response:
+        \begin{verbatim}
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "random": {
+            "data": [42, 23, 87, 15, 91],
+            "completionTime": "2024-02-17 10:15:32Z"
+        },
+        "bitsUsed": 24,
+        "requestsLeft": 999
+    },
+    "id": 1
+}
+        \end{verbatim}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Data Extraction and Transformation}
+    \begin{itemize}
+        \item Clean and structure raw data.
+        \item Use Pandas for data manipulation.
+        \item Convert data into formats like CSV, JSON, or databases.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Storing and Processing Data}
+    \begin{itemize}
+        \item Save data to CSV files using Pandas.
+        \item Consider using databases (e.g., SQLite, PostgreSQL) for larger datasets.
+        \item Visualize data with libraries like Matplotlib or Seaborn.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Real-World Applications}
+    \begin{itemize}
+        \item Market research and competitive analysis.
+        \item Social media sentiment analysis.
+        \item Price tracking and trend monitoring.
+        \item Academic research and report generation.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Advanced Topics and Best Practices}
+\begin{frame}[fragile]{Challenges in Web Scraping}
+    \begin{itemize}
+        \item Handling dynamic, JavaScript-driven pages.
+        \item Navigating anti-scraping measures (e.g., CAPTCHAs).
+        \item Keeping up with frequent website changes.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Using Selenium for Dynamic Content}
+    \begin{itemize}
+        \item Automates browsers to render JavaScript.
+        \item Captures content that isn't loaded on the initial HTML.
+        \item Example code:
+    \end{itemize}
+    \begin{verbatim}
+from selenium import webdriver
+
+driver = webdriver.Chrome()
+driver.get("https://www.example.com")
+html = driver.page_source
+driver.quit()
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{API Best Practices}
+    \begin{itemize}
+        \item Use proper authentication methods (API keys, OAuth).
+        \item Respect API rate limits and guidelines.
+        \item Implement error handling and retries.
+        \item Always consult and follow the API documentation.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Ethics and Legal Considerations}
+    \begin{itemize}
+        \item Understand the legal boundaries of web scraping.
+        \item Respect user privacy and intellectual property.
+        \item When available, prefer using official APIs over scraping.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Summary and Conclusion}
+    \begin{itemize}
+        \item Web scraping and APIs are vital tools for data extraction.
+        \item Select the right approach based on data structure and legality.
+        \item Follow best practices to ensure ethical and efficient operations.
+        \item Experiment with advanced tools for complex scraping tasks.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Further Resources}
+    \begin{itemize}
+        \item \textbf{Book:} \emph{Web Scraping with Python} by Ryan Mitchell.
+        \item \textbf{Course Supplementary:} This course has supplementary materials on the course website.
+        \item \textbf{Online Tutorials:} Real Python, Scrapy and BeautifulSoup documentation.
+        \item \textbf{Communities:} Stack Overflow, GitHub projects.
+        \item \textbf{APIs:} Official documentation for GitHub, Twitter, etc.
+    \end{itemize}
+\end{frame}
+
+\end{document}

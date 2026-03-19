@@ -1,0 +1,411 @@
+\documentclass[10pt]{beamer}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{makecell}
+\usepackage{CJKutf8}
+
+\pgfplotsset{compat=newest}
+\setbeamertemplate{navigation symbols}{}
+
+% Add section pages
+\AtBeginSection[]{
+  \begin{frame}
+    \vfill
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \vfill
+  \end{frame}
+}
+
+% Add page number to the lower right corner
+\setbeamertemplate{footline}{%
+  \hfill\usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertframenumber\,/\,\inserttotalframenumber\hspace*{1ex}\vskip2pt%
+}
+
+% Customize the page number appearance
+\setbeamercolor{page number in head/foot}{fg=gray}
+\setbeamerfont{page number in head/foot}{size=\small}
+
+\title{Programming Languages \& Tools in Data Science / Economics}
+\author{Tzu-You Lin}
+\setbeamerfont{title}{size=\huge}
+\date{April 16, 2025}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents
+\end{frame}
+
+\section{Python}
+
+\begin{frame}
+    \frametitle{Python: General-Purpose Language}
+    \begin{itemize}
+        \item Most popular programming language in 2025
+        \item Easy to learn with clean, readable syntax
+        \item Industry standard for modern data analysis:
+            \begin{itemize}
+                \item Widely adopted by major corporations
+                \item Extensive data science ecosystem
+                \item Large community support
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python: Ecosystem \& Libraries - Data Manipulation}
+    \begin{itemize}
+        \item \texttt{pandas}
+            \begin{itemize}
+                \item Powerful data structures for handling structured data
+                \item Efficient data manipulation and analysis tools
+            \end{itemize}
+        \item \texttt{numpy}
+            \begin{itemize}
+                \item Fast numerical operations and array computations
+                \item Foundation for many scientific computing libraries
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python: Ecosystem \& Libraries - Machine Learning}
+    \begin{itemize}
+        \item \texttt{scikit-learn}
+            \begin{itemize}
+                \item Comprehensive machine learning toolkit
+                \item Simple and efficient tools for data analysis
+                \item Supports many machine learning algorithms out of the box
+            \end{itemize}
+        \item \texttt{TensorFlow}
+            \begin{itemize}
+                \item Industry standard for deep learning
+                \item Robust production deployment capabilities
+            \end{itemize}
+        \item \texttt{PyTorch}
+            \begin{itemize}
+                \item Favored in academia for research
+                \item Dynamic computational graphs
+                \item Machine learning papers are more likely to use PyTorch
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python: Ecosystem \& Libraries - Visualization}
+    \begin{itemize}
+        \item \texttt{matplotlib}
+            \begin{itemize}
+                \item Foundation for Python plotting
+                \item Highly customizable static visualizations
+            \end{itemize}
+        \item \texttt{seaborn}
+            \begin{itemize}
+                \item Statistical data visualization
+                \item Built on matplotlib with higher-level interface
+            \end{itemize}
+        \item \texttt{plotly}
+            \begin{itemize}
+                \item Interactive and web-based visualizations
+                \item Modern, publication-quality graphs
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python: Industry Adoption}
+    \begin{itemize}
+        \item \textbf{Community Support}
+            \begin{itemize}
+                \item Extensive documentation and tutorials
+                \item Large community of developers and users
+                \item Vast number of open-source packages
+            \end{itemize}
+        \item \textbf{Development Environment}
+            \begin{itemize}
+                \item Interactive environments like Jupyter Notebook
+                \item Ideal for rapid prototyping
+                \item Easy to share and collaborate
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python: What should I learn next?}
+    \begin{itemize}
+        \item \textbf{Web Scraping \& Regular Expressions:}
+            \begin{itemize}
+                \item Learn \texttt{requests} and \texttt{BeautifulSoup} for web scraping
+                \item Master regular expressions for text pattern matching
+                \item Practice with \texttt{pandas} read\_html for structured web data
+            \end{itemize}
+        \item \textbf{Advanced Data Visualization:}
+            \begin{itemize}
+                \item Deep dive into \texttt{matplotlib} customization
+                \item Master \texttt{seaborn} statistical plotting
+                \item Learn to create publication-ready figures
+            \end{itemize}
+        \item \textbf{Deep Learning:}
+            \begin{itemize}
+                \item Follow Dr. Hung-yi Lee's Machine Learning course
+                \item Start with neural network fundamentals
+                \item Progress to advanced topics like CNN, RNN, and transformers
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{R}
+
+\begin{frame}
+    \frametitle{What is R?}
+    \begin{itemize}
+        \item \textbf{Programming Language for Statistics:}
+            \begin{itemize}
+                \item Open-source language developed by statisticians for statisticians
+                \item Specialized in statistical computing and data analysis
+                \item Strong focus on data manipulation and visualization
+                \item It is the go-to language for statistics for about 10 years.
+            \end{itemize}
+        \item \textbf{Key Strengths:}
+            \begin{itemize}
+                \item Interactive data analysis environment
+                \item Extensive statistical and mathematical functions
+                \item Powerful graphics capabilities
+                \item Large collection of specialized packages (CRAN)
+            \end{itemize}
+        \item \textbf{Academic and Research Focus:}
+            \begin{itemize}
+                \item Widely used in academic research
+                \item Strong presence in statistics and economics
+                \item Excellent for reproducible research
+            \end{itemize}
+    \end{itemize}
+    This would be the most-used language in NTU ECON, you should be learning it in your second year.
+\end{frame}
+
+\begin{frame}
+    \frametitle{R}
+    \begin{itemize}
+        \item \textbf{Popular Packages and Tools:}
+            \begin{itemize}
+                \item \texttt{ggplot2} for layered, grammar-of-graphics-based visualization.
+                \item \texttt{tidyverse} suite (including \texttt{dplyr}, \texttt{tidyr}, \texttt{readr}) for streamlined data manipulation and cleaning.
+                \item \texttt{knitr} and \texttt{rmarkdown} for dynamic reporting and reproducible research documents.
+                \item Specialized packages for econometrics (\texttt{lm}, \texttt{lme4}, \texttt{forecast}).
+            \end{itemize}
+        \item \textbf{Industry Applications:}
+            \begin{itemize}
+                \item Growing adoption in data science and business analytics
+                \item Integration capabilities with other programming languages
+                \item Robust support for big data processing
+            \end{itemize}
+        \item \textbf{Learning Resources:}
+            \begin{itemize}
+                \item Rich online community and documentation
+                \item Active Stack Overflow presence
+                \item Many free tutorials and courses available
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{R: What to Learn?}
+    \begin{itemize}
+        \item \textbf{Prerequisites:}
+            \begin{itemize}
+                \item Basic statistical knowledge is helpful
+                \item Understanding of data analysis concepts
+            \end{itemize}
+        \item \textbf{Learning Path:}
+            \begin{itemize}
+                \item Start with base R syntax and fundamental data structures
+                \item Master data frame operations and manipulation
+                \item Learn essential packages:
+                    \begin{itemize}
+                        \item \texttt{tidyverse} for modern data manipulation
+                        \item \texttt{ggplot2} for advanced data visualization
+                    \end{itemize}
+                \item Progress to statistical modeling and regression analysis
+            \end{itemize}
+        \item \textbf{Career Relevance:}
+            \begin{itemize}
+                \item Particularly valuable for economics/econometrics research
+                \item Strong foundation for academic research methodology
+                \item Essential for quantitative analysis in economics
+            \end{itemize}
+    \end{itemize}
+
+    Following Dr. Shiu-Sheng Chen's {\small \begin{CJK*}{UTF8}{bsmi}（陳旭昇教授）\end{CJK*}} book: {\small \begin{CJK*}{UTF8}{bsmi}機率與統計推論: R語言的應用\end{CJK*}} might be a good idea.
+\end{frame}
+
+
+\section{Stata}
+
+\begin{frame}
+    \frametitle{Stata}
+    \begin{itemize}
+        \item \textbf{Specialized Software for Econometrics:}
+            \begin{itemize}
+                \item Tailored for statistical analysis with a focus on reproducibility.
+                \item Integrated environment designed for econometric research.
+            \end{itemize}
+        \item \textbf{Key Features:}
+            \begin{itemize}
+                \item Comprehensive support for panel data analysis, time-series analysis, and causal inference.
+                \item Robust inbuilt commands with well-documented procedures.
+                \item High reliability and consistent output, ideal for academic research.
+                \item Usually has the latest econometric methods' implementation.
+            \end{itemize}
+        \item \textbf{Considerations:}
+            \begin{itemize}
+                \item Proprietary software with high licensing costs.
+                \item Limited flexibility and customizability compared to open-source alternatives.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Should I Learn Stata?}
+    \begin{itemize}
+        \item \textbf{Consider Learning Stata If:}
+            \begin{itemize}
+                \item Your courses specifically require Stata usage
+                \item You have the need to use the latest econometric methods out of the box
+                \item Your research team or advisor primarily uses Stata
+            \end{itemize}
+        \item \textbf{Otherwise, R May Be Sufficient:}
+            \begin{itemize}
+                \item R provides similar statistical capabilities
+                \item Open-source with no licensing costs
+                \item Larger community and more extensive package ecosystem
+                \item Better integration with modern data science workflows
+            \end{itemize}
+        \item \textbf{Decision Factors:}
+            \begin{itemize}
+                \item Evaluate your specific research requirements
+                \item Consider the cost-benefit of learning multiple tools
+                \item Assess the prevalent tools in your target research area
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{SQL}
+
+\begin{frame}
+    \frametitle{SQL}
+    \begin{itemize}
+        \item \textbf{Database Querying Language:}
+            \begin{itemize}
+                \item Essential for interacting with relational databases.
+                \item Standardized language across various systems like MySQL, PostgreSQL, Oracle, and SQL Server.
+            \end{itemize}
+        \item \textbf{Core Concepts:}
+            \begin{itemize}
+                \item Data Retrieval: Using SELECT, FROM, and WHERE to filter and extract data.
+                \item Data Aggregation: GROUP BY and HAVING for summarizing information.
+                \item Data Modification: Commands for INSERT, UPDATE, DELETE operations.
+                \item Advanced Operations: JOINs for combining tables, subqueries, and window functions for complex queries.
+            \end{itemize}
+        \item \textbf{Best Practices:}
+            \begin{itemize}
+                \item Optimize queries through indexing and query tuning.
+                \item Normalize data to minimize redundancy.
+                \item Use transactions to ensure data integrity.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Should I Learn SQL?}
+    \begin{itemize}
+        \item \textbf{Career Perspective:}
+            \begin{itemize}
+                \item Essential requirement for most Data Science positions
+                \item Standard skill requirement for data-related internships
+                \item Fundamental knowledge for corporate data analysis roles
+            \end{itemize}
+        \item \textbf{When to Learn SQL:}
+            \begin{itemize}
+                \item Planning to pursue a career in Data Science
+                \item Interested in corporate data analysis positions
+                \item Need to work with large-scale structured data
+            \end{itemize}
+        \item \textbf{Learning Investment:}
+            \begin{itemize}
+                \item Relatively straightforward syntax compared to programming languages
+                \item Many free online resources available
+                \item Skills remain relevant across different database systems
+            \end{itemize}
+        \item \textbf{Practical Value:}
+            \begin{itemize}
+                \item Efficient data manipulation and analysis
+                \item Complements other data science tools like Python and R
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{How to Learn SQL?}
+    \begin{itemize}
+        \item \textbf{LeetCode SQL 50:}
+            \begin{itemize}
+                \item Curated collection of essential SQL problems
+                \item Organized by difficulty level
+                \item Interactive practice with immediate feedback
+                \item Great starting point for beginners
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+
+
+\section{PowerBI and Tableau}
+
+\begin{frame}
+    \frametitle{PowerBI and Tableau}
+    \begin{itemize}
+        \item \textbf{Business Intelligence Tools:}
+            \begin{itemize}
+                \item Designed for interactive data visualization and dashboard creation.
+                \item Widely used in corporate settings for real-time analytics.
+            \end{itemize}
+        \item \textbf{Key Capabilities:}
+            \begin{itemize}
+                \item Drag-and-drop interfaces that simplify dashboard design.
+                \item Seamless integration with diverse data sources, including cloud services, databases, and spreadsheets.
+                \item Advanced features such as predictive analytics, trend analysis, and drill-down capabilities.
+            \end{itemize}
+        \item \textbf{Comparative Highlights:}
+            \begin{itemize}
+                \item \textbf{PowerBI:} Strong integration with the Microsoft ecosystem, cost-effective licensing, and frequent updates.
+                \item \textbf{Tableau:} Emphasizes visual storytelling with flexible data connections and a robust user community.
+            \end{itemize}
+        \item \textbf{Use Cases:}
+            \begin{itemize}
+                \item Real-time monitoring of key performance indicators (KPIs).
+                \item Creating tailored dashboards for diverse business needs.
+                \item Facilitating collaborative data exploration and decision-making.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{References}
+% \end{frame}
+
+\end{document}

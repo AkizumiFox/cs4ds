@@ -1,0 +1,166 @@
+\documentclass[10pt]{beamer}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{makecell}
+\usepackage{CJKutf8}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\pgfplotsset{compat=newest}
+\setbeamertemplate{navigation symbols}{}
+
+% Add page number to the lower right corner
+\setbeamertemplate{footline}{%
+  \hfill\usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertframenumber\,/\,\inserttotalframenumber\hspace*{1ex}\vskip2pt%
+}
+\setbeamercolor{page number in head/foot}{fg=gray}
+\setbeamerfont{page number in head/foot}{size=\small}
+
+\title{Slight Review for the Final Exam}
+\author{Tzu-You Lin}
+\date{May 28, 2025}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}[fragile]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Announcements}
+
+	\begin{itemize}
+		\item Homework 4 is \textcolor{gray}{(finally)} available.
+		\begin{itemize}
+			\item The deadline is June 15, 02:59:59.
+		\end{itemize}
+		\item We will have a final exam on June 4.
+		\begin{itemize}
+			\item Refer to NTU COOL for more details. 
+			\item (Do not make a Möbius strip for the cheat sheet)
+			\item The exam will be in Mandarin.
+			\item The supplementary materials will count for 15\% of the final exam; the scope is from Lecture 1 through Lecture 4.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Skipping Rest of the Supplementary Materials}
+
+	The supplementary materials originally included Lecture 5 and Lecture 6.
+	\begin{itemize}
+		\item Lecture 5: Web Scraping
+		\item Lecture 6: Basic SQL
+	\end{itemize}
+
+	However, since you all looked like you were struggling and we can't cover the remaining material, we'll skip those lectures. If someone is interested in these materials, you can contact me and I will release the slides (I really put a lot of effort into them).
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Review of Lecture 1}
+
+	You are expected to know the basic usages of the commands and how to write them:
+	\begin{itemize}
+		\item How to change directory (to a specific directory, to the home directory, to the parent directory, etc.), list files, and create/remove files and directories
+		\item How to run a program in the terminal (python, R, etc.)
+		\item How to use the redirection operator and the pipe operator
+	\end{itemize}
+
+	Remembering the basic usages of the commands is fine. Harder things like file processing (e.g. \texttt{grep} and \texttt{awk}) and data formats are not expected to be known.
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Review of Lecture 2}
+
+	You are expected to know:
+	\begin{itemize}
+		\item What are the traits of the programming languages in the lecture?
+		\item What are the packages commonly used in the programming languages in the lecture?
+		\item What are the packages you learned used for?
+	\end{itemize}
+
+	Please focus on Python and R.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Review of Lecture 3}
+
+	You are expected to know:
+	\begin{itemize}
+		\item How to write basic Markdown? (e.g. headings, lists, links, images, tables)
+		\item How to write basic LaTeX equations?
+	\end{itemize}
+
+	Sample equations you might be asked to write:
+	\begin{itemize}
+		\item $a^2 + b^2 = c^2$
+		\item $u'(c_t) = \beta u'(c_{t+1})  \left(1 + r_t\right)$
+		\item $\frac{df}{dx} = f'(x)$
+	\end{itemize}
+
+	Remember these and you'll be fine:
+	\begin{itemize}
+		\item Writing fractions: \texttt{\textbackslash frac\{a\}\{b\}}
+		\item Writing Greek letters: \texttt{\textbackslash alpha}, \texttt{\textbackslash beta}, \texttt{\textbackslash gamma}
+		\item Writing subscripts: \texttt{x\_\{i\}} and superscripts: \texttt{x\^{}\{2\}}
+		\item Writing parentheses and alphabets
+		\item Writing \textcolor{blue}{inline} equations and \textcolor{blue}{displayed} equations
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Review of Lecture 4}
+
+	You are expected to know:
+	\begin{itemize}
+		\item The concept of Git and version control
+		\item How to add (any/all) files to the staging area using command
+		\item How to commit changes (and write a commit message) using command
+	\end{itemize}
+
+	I know this is a hard topic, so these are all I will ask you.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Summary}
+
+	\begin{itemize}
+		\item I wouldn't recommend writing too much about the supplementary materials on your cheat sheet; 25\% is plenty.
+		\item Please focus on the topics I mentioned today. You should be able to answer most questions by studying them.
+		\item Q: Why are the notes in English while the exam is in Mandarin?\\ A: Sorry, I just type faster in English.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Any Questions?}
+
+	If you have any questions—whether about programming, extending your computer skills, transferring majors, job searches, or anything else—feel free to contact Kevin or me anytime:
+
+	\begin{itemize}
+		\item Kevin: \texttt{weisl@nlg.csie.ntu.edu.tw}
+		\item Me: \texttt{b10303083@ntu.edu.tw}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{center}
+		\Huge Thank you for your attention!\\
+		\vspace{1cm}
+		\Large Good luck on your exam!
+	\end{center}
+\end{frame}
+
+
+\end{document}
